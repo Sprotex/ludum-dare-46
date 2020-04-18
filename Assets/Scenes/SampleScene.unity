@@ -229,6 +229,7 @@ MonoBehaviour:
   playerTransform: {fileID: 997260880}
   tileSize: 40
   halfMapSize: {x: 2, y: 4}
+  origin: {x: 0, y: 0}
 --- !u!4 &103844643
 Transform:
   m_ObjectHideFlags: 0
@@ -446,7 +447,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &266473201
 GameObject:
@@ -490,7 +491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276876394
 GameObject:
@@ -521,9 +522,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 732bfead560d39a45842706554f9cd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapGenerator: {fileID: 103844642}
   wormPrefab: {fileID: 3401544600077900908, guid: 0664f89be9e93e248b5819803148115a,
     type: 3}
-  delayBetweenSpawns: 5
+  delayBetweenSpawns: 0.1
   playerDistance: 20
   playerTransform: {fileID: 997260880}
 --- !u!4 &276876396
@@ -538,7 +540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &586203259
 GameObject:
@@ -613,7 +615,7 @@ Transform:
   m_Children:
   - {fileID: 773988287}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -705,7 +707,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &720169287
 GameObject:
@@ -914,7 +916,12 @@ MonoBehaviour:
   hungerDecrement: 0.01
   hungryThreshold: 0.4
   huntingSpeed: 5
-  target: {fileID: 0}
+  flightHeight: 20
+  minimumTargetDistance: 30
+  groundAttackDistance: 30
+  angularVelocity: 60
+  targetPosition: {fileID: 0}
+  targetObject: {fileID: 0}
 --- !u!65 &1079282435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1019,6 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hungerDecrementPerSecond: 0.01
+  hungerDecrementAdd: 0.01
   hungerIndicator: {fileID: 720169289}
 --- !u!4 &1181457753
 Transform:
@@ -1128,7 +1136,7 @@ RectTransform:
   - {fileID: 58634417}
   - {fileID: 1379843924}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1199,7 +1207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1379843923
 GameObject:
@@ -1372,7 +1380,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1940010333 stripped
 Transform:

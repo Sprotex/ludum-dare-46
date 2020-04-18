@@ -40,6 +40,10 @@ public class WormMovement : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < -100f)
+        {
+            Destroy(gameObject);
+        }
         var interpolatedTime = Time.deltaTime * accelerationMultiplier;
         if (closeEnemies.Count > 0)
         {

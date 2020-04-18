@@ -8,13 +8,11 @@ public class MapGenerator : MonoBehaviour
     public Transform playerTransform;
     public int tileSize = 5;
     public Vector2Int halfMapSize;
+    public Vector2 origin;
 
     private void Start()
     {
-        var position = playerTransform.position;
-        position /= tileSize;
-        position.x = Mathf.Floor(position.x);
-        position.y = Mathf.Floor(position.y);
+        var position = origin;
         for (var x = -halfMapSize.x; x <= halfMapSize.x; ++x) {
             for (var y = -halfMapSize.y; y <= halfMapSize.y; ++y)
             {

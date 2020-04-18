@@ -39,13 +39,15 @@ public class PlayerMovement : MonoBehaviour
         if (isFlying && transform.position.y < topLayerHeight)
         {
             movement.y = verticalSpeed;
-        }
-        else if (!isFlying && transform.position.y > 0f)
+        } else if (!isFlying && transform.position.y > 0f)
         {
             movement.y = -verticalSpeed;
+        } else if (!controller.isGrounded)
+        {
+            movement.y += Physics.gravity.y * Time.deltaTime;
         } else
         {
-            movement.y = 0f;
+            movement.y = 0;
         }
         controller.Move(transform.TransformVector(movement) * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, yRotation * rotationSpeed.y * Time.deltaTime);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WormMovement : MonoBehaviour
 {
-    public Rigidbody rb;
+    public Collider coll;
     public LayerMask fleeMask;
     public float moveSpeed = 5f;
     public float runSpeed = 10f;
@@ -46,7 +46,7 @@ public class WormMovement : MonoBehaviour
             currentSpeed = Mathf.Lerp(currentSpeed, runSpeed, interpolatedTime);
             if (Time.time - safeTime > timeUntilBurrowingStarts)
             {
-                rb.useGravity = false;
+                coll.enabled = false;
                 StartCoroutine(DestroyAfterSeconds(1f));
             }
         } else

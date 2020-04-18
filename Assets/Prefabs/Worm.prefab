@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3401544600077900906}
   - component: {fileID: 3401544600077900905}
+  - component: {fileID: 217920618943024861}
   - component: {fileID: 3401544600077900904}
   - component: {fileID: 3401544600077900911}
   - component: {fileID: 3401544600077900910}
   - component: {fileID: 3401544600077900909}
   - component: {fileID: 3401544600077900907}
-  - component: {fileID: 217920618943024861}
   m_Layer: 9
   m_Name: Worm
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30195a05e4100694396bcff2dd299263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3401544600077900907}
+  coll: {fileID: 3401544600077900910}
   fleeMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -58,6 +58,19 @@ MonoBehaviour:
   rotationSpeed: 5
   accelerationMultiplier: 1
   timeUntilBurrowingStarts: 2.5
+--- !u!114 &217920618943024861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3401544600077900908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8d736be56de104f907bbc06370b4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.1
 --- !u!33 &3401544600077900904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -147,16 +160,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &217920618943024861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3401544600077900908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a8d736be56de104f907bbc06370b4f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount: 0.1

@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Nest : MonoBehaviour
 {
     private float hungerPercentage = 1f;
-    public float hungerDecrementPerSecond;
+    public float hungerDecrementPerSecond = 0.01f;
+    public float hungerDecrementAdd = 0.01f;
     public Image hungerIndicator;
 
     // NOTE(Andy): Property, because it will be integrated with the UI.
@@ -21,6 +22,20 @@ public class Nest : MonoBehaviour
             hungerPercentage = value;
             hungerIndicator.fillAmount = value;
         }
+    }
+
+    private IEnumerator HungerIncrease()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(60f);
+            hungerDecrementPerSecond += hungerDecrementAdd; 
+        }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(HungerIncrease());
     }
 
     public void Update()

@@ -22,12 +22,15 @@ public class PlayerMovement : MonoBehaviour
         }
         var horizontalMovement = Input.GetAxis("Horizontal");
         var verticalMovement = Input.GetAxis("Vertical");
+        var y = movement.y;
+        movement.y = 0;
         movement.x = horizontalMovement;
         movement.z = verticalMovement;
         if (movement.sqrMagnitude > 1f)
         {
             movement.Normalize();
         }
+        movement.y = y;
         xRotation += -Input.GetAxis("Mouse Y") * rotationSpeed.x;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         yRotation = Input.GetAxis("Mouse X");
@@ -39,9 +42,6 @@ public class PlayerMovement : MonoBehaviour
         if (isFlying && transform.position.y < topLayerHeight)
         {
             movement.y = verticalSpeed;
-        } else if (!isFlying && transform.position.y > 0f)
-        {
-            movement.y = -verticalSpeed;
         } else if (!controller.isGrounded)
         {
             movement.y += Physics.gravity.y * Time.deltaTime;

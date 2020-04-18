@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Transform cameraXRig;
+
     public float moveSpeed = 5f;
-    public float rotateSpeed = 5f;
+    public Vector2 rotationSpeed = Vector2.zero;
 
     private bool isFlying = false;
     private Vector3 movement = Vector3.zero;
+    private float xRotation = 0f;
+    private float yRotation = 0f;
 
     private void HandleInputs()
     {
@@ -24,16 +26,21 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.Normalize();
         }
+        xRotation += -Input.GetAxis("Mouse Y") * rotationSpeed.x;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        yRotation = Input.GetAxis("Mouse X");
     }
 
-    private void Move()
+    private void MoveAndRotate()
     {
         transform.Translate(movement * moveSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up, yRotation * rotationSpeed.y * Time.deltaTime);
+        cameraXRig.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
     private void Update()
     {
         HandleInputs();
-        Move();
+        MoveAndRotate();
     }
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 139406083}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera Y Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1940010333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera X Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,8 +129,12 @@ GameObject:
   - component: {fileID: 4007772099443160027}
   - component: {fileID: 8244626713302357118}
   - component: {fileID: 2050516200002835680}
-  - component: {fileID: 778935462}
   - component: {fileID: 8443947600164620404}
+  - component: {fileID: 778935462}
+  - component: {fileID: 1032903624}
+  - component: {fileID: 7001275485020495097}
+  - component: {fileID: 1032903629}
+  - component: {fileID: 795598570249468743}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -201,23 +205,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &778935462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855166275788784544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf5bb341e1ae7c04aba8338bf79b4336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraXRig: {fileID: 1940010333}
-  controller: {fileID: 8443947600164620404}
-  moveSpeed: 5
-  verticalSpeed: 5
-  rotationSpeed: {x: 2, y: 70}
 --- !u!143 &8443947600164620404
 CharacterController:
   m_ObjectHideFlags: 0
@@ -236,3 +223,75 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &778935462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855166275788784544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf5bb341e1ae7c04aba8338bf79b4336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraXRig: {fileID: 1940010333}
+  controller: {fileID: 8443947600164620404}
+  moveSpeed: 5
+  verticalSpeed: 5
+  rotationSpeed: {x: 2, y: 200}
+--- !u!114 &1032903624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855166275788784544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7109198f26ad4c3429c1cae483ef5104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inside: {fileID: 3909127633525986408}
+  storage: {fileID: 1032903629}
+--- !u!114 &7001275485020495097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855166275788784544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964d69a3704999b4dbc71a45ab2d2bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodStorage: {fileID: 1032903629}
+  health: {fileID: 795598570249468743}
+  nest: {fileID: 0}
+  nestFeedingRadius: 3
+--- !u!114 &1032903629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855166275788784544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e005d667f6bfe44b2d45f2eafdecc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &795598570249468743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855166275788784544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2666d79026725a54cbc9bce6c34c9cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthIndicator: {fileID: 0}

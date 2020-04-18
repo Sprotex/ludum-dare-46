@@ -1,18 +1,39 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FoodStorage : MonoBehaviour
 {
     private List<float> foodAmounts = new List<float>();
+    private float totalFood = 0f;
+    public TextMeshProUGUI foodTextUI;
     public void AddFood(Food food)
     {
         foodAmounts.Add(food.amount);
+        totalFood += food.amount;
+        foodTextUI.SetText(totalFood.ToString());
     }
 
-    public float RemoveFood()
+    private float RemoveFood()
     {
-        var foodAmount = foodAmounts[0];
-        foodAmounts.RemoveAt(0);
-        return foodAmount;
+        var result = 0f;
+        if (foodAmounts.Count > 0)
+        {
+            result = foodAmounts[0];
+            foodAmounts.RemoveAt(0);
+            totalFood -= result;
+            foodTextUI.SetText(totalFood.ToString());
+        } 
+        return result;
+    }
+
+    public void UseFood(Nest nest)
+    {
+        nest.HungerPercentage += RemoveFood();
+    }
+
+    public void UseFood(Health health)
+    {
+        health.HealthPercentage += RemoveFood();
     }
 }

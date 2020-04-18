@@ -3,8 +3,10 @@
 public class PlayerMovement : MonoBehaviour
 {
     public Transform cameraXRig;
+    public CharacterController controller;
 
     public float moveSpeed = 5f;
+    public float verticalSpeed = 5f;
     public Vector2 rotationSpeed = Vector2.zero;
 
     private bool isFlying = false;
@@ -33,9 +35,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveAndRotate()
     {
-        transform.Translate(movement * moveSpeed * Time.deltaTime);
+        var topLayerHeight = Globals.instance.topLayerHeight;
+        if (isFlying && transform.position.y < topLayerHeight)
+        {
+            movement.y = verticalSpeed;
+        }
+        else if (!isFlying && transform.position.y > 0f)
+        {
+            movement.y = -verticalSpeed;
+        } else
+        {
+            movement.y = 0f;
+        }
+        controller.Move(transform.TransformVector(movement) * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, yRotation * rotationSpeed.y * Time.deltaTime);
         cameraXRig.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        if (transform.position.y > topLayerHeight)
+        {
+            var position = transform.position;
+            position.y = topLayerHeight;
+            transform.position = position;
+        }
     }
 
     private void Update()

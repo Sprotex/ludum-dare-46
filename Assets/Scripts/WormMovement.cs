@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class WormMovement : MonoBehaviour
 {
+    public Rigidbody rb;
     public LayerMask fleeMask;
     public float moveSpeed = 5f;
     public float runSpeed = 10f;
     public float rotationSpeed = 5f;
     public float accelerationMultiplier = 1f;
+    public float timeUntilBurrowingStarts = 2.5f;
 
     private HashSet<Transform> closeEnemies = new HashSet<Transform>();
     private float currentSpeed = 0f;
+    private float safeTime = -500f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,15 +32,27 @@ public class WormMovement : MonoBehaviour
         }
     }
 
+    private IEnumerator DestroyAfterSeconds(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
+    }
+
     private void Update()
     {
         var interpolatedTime = Time.deltaTime * accelerationMultiplier;
         if (closeEnemies.Count > 0)
         {
             currentSpeed = Mathf.Lerp(currentSpeed, runSpeed, interpolatedTime);
+            if (Time.time - safeTime > timeUntilBurrowingStarts)
+            {
+                rb.useGravity = false;
+                StartCoroutine(DestroyAfterSeconds(1f));
+            }
         } else
         {
             currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, interpolatedTime);
+            safeTime = Time.time;
         }
         transform.Translate(transform.forward * currentSpeed * Time.deltaTime);
     }

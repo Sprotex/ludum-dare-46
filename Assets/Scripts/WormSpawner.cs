@@ -28,7 +28,6 @@ public class WormSpawner : MonoBehaviour
                 } 
             }
             spawnPosition += Vector3.up * .2f;
-            print(spawnPosition);
             Instantiate(wormPrefab, spawnPosition, Quaternion.Euler(90f, Random.Range(0f, 360f), 0f), null);
         }
     }

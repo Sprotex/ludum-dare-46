@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30195a05e4100694396bcff2dd299263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 3401544600077900907}
   fleeMask:
     serializedVersion: 2
     m_Bits: 1280
@@ -56,6 +57,7 @@ MonoBehaviour:
   runSpeed: 1
   rotationSpeed: 5
   accelerationMultiplier: 1
+  timeUntilBurrowingStarts: 2.5
 --- !u!33 &3401544600077900904
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -6,12 +6,13 @@ public class FoodStorage : MonoBehaviour
 {
     private List<float> foodAmounts = new List<float>();
     private float totalFood = 0f;
+    private const string format = "F2";
     public TextMeshProUGUI foodTextUI;
     public void AddFood(Food food)
     {
         foodAmounts.Add(food.amount);
         totalFood += food.amount;
-        foodTextUI.SetText(totalFood.ToString());
+        foodTextUI.SetText(totalFood.ToString(format));
     }
 
     private float RemoveFood()
@@ -22,14 +23,14 @@ public class FoodStorage : MonoBehaviour
             result = foodAmounts[0];
             foodAmounts.RemoveAt(0);
             totalFood -= result;
-            foodTextUI.SetText(totalFood.ToString());
+            foodTextUI.SetText(totalFood.ToString(format));
         } 
         return result;
     }
 
     public void UseFood(Nest nest)
     {
-        nest.HungerPercentage += RemoveFood();
+        nest.Feed(RemoveFood());
     }
 
     public void UseFood(Health health)

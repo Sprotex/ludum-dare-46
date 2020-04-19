@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +10,7 @@ public class Nest : MonoBehaviour
     public Image hungerIndicator;
 
     // NOTE(Andy): Property, because it will be integrated with the UI.
-    public float HungerPercentage
+    private float HungerPercentage
     {
         get
         {
@@ -46,5 +45,6 @@ public class Nest : MonoBehaviour
     public void Feed(float percentageAmount)
     {
         HungerPercentage = Mathf.Clamp01(HungerPercentage + percentageAmount);
+        if (percentageAmount > 0f) Score.instance.Points += 1;
     }
 }

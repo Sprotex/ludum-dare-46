@@ -29,7 +29,7 @@ public class GameMenuLogic : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown(CConstants.Input.Cancel))
         {
             DisplayMenu();
         }

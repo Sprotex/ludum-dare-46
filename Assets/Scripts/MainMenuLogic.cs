@@ -31,4 +31,9 @@ public class MainMenuLogic : MonoBehaviour
     {
         SwitchToPanel(mainPanel);
     }
+    public void Tutorial()
+    {
+        PlayerPrefs.SetInt(CConstants.PPrefs.Tutorial, 1);
+        NewGame();
+    }
 }

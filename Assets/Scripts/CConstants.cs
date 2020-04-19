@@ -17,5 +17,6 @@ public static class CConstants
         public const string Fly = "Fly";
         public const string FeedChildren = "Feed Children";
         public const string FeedSelf = "Feed Self";
+        public const string Pickup = "Pickup";
     }
 }

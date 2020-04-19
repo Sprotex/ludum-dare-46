@@ -4,7 +4,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform cameraXRig;
     public CharacterController controller;
-
     public float flySpeedMultiplier = 1.5f;
     public float moveSpeed = 5f;
     public float verticalSpeed = 5f;
@@ -39,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveAndRotate()
     {
-        var topLayerHeight = Globals.instance.topLayerHeight;
+        var topLayerHeight = FlightVariables.instance.topLayerHeight;
         if (isFlying && transform.position.y < topLayerHeight)
         {
             movement.y = verticalSpeed;
@@ -65,10 +64,10 @@ public class PlayerMovement : MonoBehaviour
             transform.position = position;
         }
     }
-
     private void Update()
     {
         HandleInputs();
         MoveAndRotate();
+
     }
 }

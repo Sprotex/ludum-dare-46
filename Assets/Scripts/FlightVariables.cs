@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Globals : MonoBehaviour
+public class FlightVariables : MonoBehaviour
 {
-    public static Globals instance;
+    public static FlightVariables instance;
     public float topLayerHeight = 20f;
     private void Awake()
     {

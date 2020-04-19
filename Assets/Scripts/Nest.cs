@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Nest : MonoBehaviour
 {
     private float hungerPercentage = 1f;
+    private AudioSource birdsSource;
     public float hungerDecrementPerSecond = 0.01f;
     public float hungerDecrementAdd = 0.01f;
     public Image hungerIndicator;
@@ -35,6 +36,9 @@ public class Nest : MonoBehaviour
     private void Start()
     {
         StartCoroutine(HungerIncrease());
+        var sound = SoundManager.instance;
+        birdsSource = sound.Play(transform.position, sound.birdChirping);
+        birdsSource.loop = true;
     }
 
     public void Update()

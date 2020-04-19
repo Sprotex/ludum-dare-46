@@ -380,6 +380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefabs:
   - {fileID: 2207107402957711078, guid: 5be323fc240291e4daef39f09dac9f10, type: 3}
+  - {fileID: 2207107402957711078, guid: 8a085579148ab3f42ad80620bec96814, type: 3}
   folder: {fileID: 103844643}
   tileSize: 40
   halfMapSize: {x: 2, y: 4}
@@ -1030,6 +1031,7 @@ MonoBehaviour:
   delayBetweenSpawns: 0.1
   playerDistance: 20
   playerTransform: {fileID: 997260880}
+  wormFolder: {fileID: 276876396}
 --- !u!4 &276876396
 Transform:
   m_ObjectHideFlags: 0
@@ -1498,13 +1500,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &720169287
 GameObject:
   m_ObjectHideFlags: 0

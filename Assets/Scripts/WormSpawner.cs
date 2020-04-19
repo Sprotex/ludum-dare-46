@@ -8,6 +8,7 @@ public class WormSpawner : MonoBehaviour
     public float delayBetweenSpawns = 5f; // TODO(Andy): Optimize before build! This is good for testing only!
     public float playerDistance = 20f;
     public Transform playerTransform;
+    public Transform wormFolder;
 
     private IEnumerator spawningCoroutine;
 
@@ -32,7 +33,7 @@ public class WormSpawner : MonoBehaviour
                 } 
             }
             spawnPosition += Vector3.up * .2f;
-            Instantiate(wormPrefab, spawnPosition, Quaternion.Euler(90f, Random.Range(0f, 360f), 0f), null);
+            Instantiate(wormPrefab, spawnPosition, Quaternion.Euler(90f, Random.Range(0f, 360f), 0f), wormFolder);
         }
     }
 

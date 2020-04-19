@@ -17,7 +17,9 @@ public class MapGenerator : MonoBehaviour
             {
                 var spawnPosition = new Vector3(position.x + x * tileSize, 0f, position.y + y * tileSize);
                 var spawnRotation = Quaternion.Euler(0f, Random.Range(0, 4) * 90f, 0f);
-                Instantiate(tilePrefabs[0], spawnPosition, spawnRotation, folder);
+                var tileIndex = Random.Range(0, tilePrefabs.Count);
+                var tilePrefab = tilePrefabs[tileIndex];
+                Instantiate(tilePrefab, spawnPosition, spawnRotation, folder);
             }
         }
     }

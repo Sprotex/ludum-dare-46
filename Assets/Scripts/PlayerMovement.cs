@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleInputs()
     {
-        if (Input.GetButtonDown("Fly"))
+        if (Input.GetButtonDown(CConstants.Input.Fly))
         {
             isFlying = !isFlying;
         }
-        var horizontalMovement = Input.GetAxis("Horizontal");
-        var verticalMovement = Input.GetAxis("Vertical");
+        var horizontalMovement = Input.GetAxis(CConstants.Input.HorizontalAxis);
+        var verticalMovement = Input.GetAxis(CConstants.Input.VerticalAxis);
         var y = movement.y;
         movement.y = 0;
         movement.x = horizontalMovement;
@@ -31,9 +31,9 @@ public class PlayerMovement : MonoBehaviour
             movement.Normalize();
         }
         movement.y = y;
-        xRotation += -Input.GetAxis("Mouse Y") * rotationSpeed.x;
+        xRotation += -Input.GetAxis(CConstants.Input.MouseY) * rotationSpeed.x;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        yRotation = Input.GetAxis("Mouse X");
+        yRotation = Input.GetAxis(CConstants.Input.MouseX);
     }
 
     private void MoveAndRotate()

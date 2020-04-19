@@ -9,14 +9,12 @@ public class PlayerFeed : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Feed Self"))
+        if (Input.GetButtonDown(CConstants.Input.FeedSelf))
         {
-            print("Feed self");
             foodStorage.UseFood(health);
         }
-        if (Input.GetButtonDown("Feed Children"))
+        if (Input.GetButtonDown(CConstants.Input.FeedChildren))
         {
-            print("Feed children");
             var diff = nest.transform.position - transform.position;
             if (diff.sqrMagnitude <= nestFeedingRadius * nestFeedingRadius)
             {

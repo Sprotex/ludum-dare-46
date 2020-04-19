@@ -6,7 +6,7 @@ public class PlayerAttack : MonoBehaviour
     public FoodStorage storage;
     private void Update()
     {
-        if (Input.GetButton("Attack"))
+        if (Input.GetButton(CConstants.Input.Attack))
         {
             var objects = inside.GetObjectsInside();
             foreach (var thing in objects)

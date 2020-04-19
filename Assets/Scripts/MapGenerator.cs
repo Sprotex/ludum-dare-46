@@ -5,7 +5,6 @@ public class MapGenerator : MonoBehaviour
 {
     public List<GameObject> tilePrefabs;
     public Transform folder;
-    public Transform playerTransform;
     public int tileSize = 5;
     public Vector2Int halfMapSize;
     public Vector2 origin;

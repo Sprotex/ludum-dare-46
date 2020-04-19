@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simultaneousDynamicSounds: 64
-  mainMusic: {fileID: 8300000, guid: 103bd0467bf3851408637370b721c2fa, type: 3}
+  mainMusic: {fileID: 8300000, guid: 09624400bb251e549a07202452c5af26, type: 3}
   hit: {fileID: 8300000, guid: 103bd0467bf3851408637370b721c2fa, type: 3}
   ambientHigh: {fileID: 8300000, guid: 300f45d0528089e45a5be89c030350e0, type: 3}
   ambientLow: {fileID: 8300000, guid: 712400f7eda2dc14db793d21e8bc4ba1, type: 3}

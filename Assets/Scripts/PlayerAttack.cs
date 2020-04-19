@@ -11,13 +11,16 @@ public class PlayerAttack : MonoBehaviour
             var objects = inside.GetObjectsInside();
             foreach (var thing in objects)
             {
-                var food = thing.GetComponent<Food>();
-                if (food != null)
+                if (thing != null)
                 {
-                    storage.AddFood(food);
-                    inside.Remove(thing);
-                    Destroy(thing);
-                    break;
+                    var food = thing.GetComponent<Food>();
+                    if (food != null)
+                    {
+                        storage.AddFood(food);
+                        inside.Remove(thing);
+                        Destroy(thing);
+                        break;
+                    }
                 }
             }
         }

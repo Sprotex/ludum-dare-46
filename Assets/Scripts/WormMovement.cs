@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WormMovement : MonoBehaviour
 {
-    public Collider coll;
+    public Animator animator;
     public LayerMask fleeMask;
+    public Rigidbody rb;
     public float moveSpeed = 5f;
-    public float runSpeed = 10f;
+    public float runSpeedMultiplier = 2f;
     public float rotationSpeed = 5f;
     public float accelerationMultiplier = 1f;
     public float timeUntilBurrowingStarts = 2.5f;
@@ -32,12 +33,6 @@ public class WormMovement : MonoBehaviour
         }
     }
 
-    private IEnumerator DestroyAfterSeconds(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        Destroy(gameObject);
-    }
-
     private void Update()
     {
         if (transform.position.y < -100f)
@@ -47,17 +42,18 @@ public class WormMovement : MonoBehaviour
         var interpolatedTime = Time.deltaTime * accelerationMultiplier;
         if (closeEnemies.Count > 0)
         {
-            currentSpeed = Mathf.Lerp(currentSpeed, runSpeed, interpolatedTime);
+            animator.SetFloat("Speed", runSpeedMultiplier);
+            currentSpeed = Mathf.Lerp(currentSpeed, currentSpeed * runSpeedMultiplier, interpolatedTime);
             if (Time.time - safeTime > timeUntilBurrowingStarts)
             {
-                coll.enabled = false;
-                StartCoroutine(DestroyAfterSeconds(1f));
+                animator.SetTrigger("Burrow");
             }
         } else
         {
+            animator.SetFloat("Speed", 1f);
             currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, interpolatedTime);
             safeTime = Time.time;
         }
-        transform.Translate(transform.forward * currentSpeed * Time.deltaTime);
+        rb.velocity = transform.forward * currentSpeed * Time.deltaTime;
     }
 }

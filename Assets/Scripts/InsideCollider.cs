@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -8,7 +7,10 @@ public class InsideCollider : MonoBehaviour
     private HashSet<GameObject> objects = new HashSet<GameObject>();
     private void OnTriggerEnter(Collider other)
     {
-        objects.Add(other.gameObject);
+        if (!other.isTrigger)
+        {
+            objects.Add(other.gameObject);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -16,7 +18,10 @@ public class InsideCollider : MonoBehaviour
     }
     public void Remove(GameObject other)
     {
-        objects.Remove(other);
+        if (objects.Contains(other))
+        {
+            objects.Remove(other);
+        }
     }
     public List<GameObject> GetObjectsInside()
     {

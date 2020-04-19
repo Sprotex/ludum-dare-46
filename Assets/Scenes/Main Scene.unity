@@ -422,9 +422,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988572aebdda8584da5771b12821944f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilePrefabs:
-  - {fileID: 2207107402957711078, guid: 5be323fc240291e4daef39f09dac9f10, type: 3}
+  iTiles:
+  - {fileID: 2530094593232597279, guid: c860747140f5ddf40a6db0581871d66c, type: 3}
+  lTiles:
   - {fileID: 2207107402957711078, guid: 8a085579148ab3f42ad80620bec96814, type: 3}
+  tTiles:
+  - {fileID: 2295888820252936816, guid: fca74d47193fa5745ab4a46dd2e2ba8d, type: 3}
+  xTiles:
+  - {fileID: 2207107402957711078, guid: 5be323fc240291e4daef39f09dac9f10, type: 3}
+  oTiles:
+  - {fileID: 4697770465029882449, guid: 344d191665e266c4eb51b098fb444fa3, type: 3}
+  endTiles:
+  - {fileID: 7234805802884093617, guid: 97bd1053d8fb17d4fbbe0825ebfef762, type: 3}
   folder: {fileID: 103844643}
   tileSize: 40
   halfMapSize: {x: 2, y: 4}
@@ -3359,7 +3368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1535889064
 PrefabInstance:
@@ -3990,7 +3999,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 778935462, guid: 602243bc46f45c440b17d05977161729, type: 3}
       propertyPath: flySpeedMultiplier
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1032903629, guid: 602243bc46f45c440b17d05977161729, type: 3}
       propertyPath: foodIndicator
@@ -4048,7 +4057,7 @@ PrefabInstance:
     - target: {fileID: 4007772099443160027, guid: 602243bc46f45c440b17d05977161729,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4007772099443160027, guid: 602243bc46f45c440b17d05977161729,
         type: 3}

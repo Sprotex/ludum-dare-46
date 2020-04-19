@@ -57,7 +57,8 @@ public class SoundManager : MonoBehaviour
         Music = CreateSource("Music");
         Music.spatialBlend = 0f;
         Music.clip = mainMusic;
-        //Music.Play();
+        Music.volume = .2f;
+        Music.Play();
         Music.loop = true;
         AmbientHighSource = CreateSource("Ambient High Source");
         AmbientHighSource.volume = 0f;

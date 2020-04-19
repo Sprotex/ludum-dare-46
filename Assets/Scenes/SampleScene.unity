@@ -3788,6 +3788,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778935462, guid: 602243bc46f45c440b17d05977161729, type: 3}
+      propertyPath: flySpeedMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1032903629, guid: 602243bc46f45c440b17d05977161729, type: 3}
       propertyPath: foodIndicator
       value: 

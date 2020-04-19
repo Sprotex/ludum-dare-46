@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform cameraXRig;
     public CharacterController controller;
 
+    public float flySpeedMultiplier = 1.5f;
     public float moveSpeed = 5f;
     public float verticalSpeed = 5f;
     public Vector2 rotationSpeed = Vector2.zero;
@@ -48,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
         } else
         {
             movement.y = 0;
+        }
+        if (isFlying)
+        {
+            movement.x *= flySpeedMultiplier;
+            movement.z *= flySpeedMultiplier;
         }
         controller.Move(transform.TransformVector(movement) * moveSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up, yRotation * rotationSpeed.y * Time.deltaTime);

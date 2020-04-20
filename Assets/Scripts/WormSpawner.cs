@@ -7,6 +7,7 @@ public class WormSpawner : MonoBehaviour
     public GameObject wormPrefab;
     public float delayBetweenSpawns = 5f; // TODO(Andy): Optimize before build! This is good for testing only!
     public float playerDistance = 20f;
+    public int maxWormCount = 35;
     public Transform playerTransform;
     public Transform wormFolder;
 
@@ -22,6 +23,10 @@ public class WormSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(delayBetweenSpawns);
+
+            if (FeedingPoints.instance.food.Count >= maxWormCount)
+                continue;
+
             var tileSize = mapGenerator.tileSize;
             var halfMapSize = mapGenerator.halfMapSize;
             var mapPosition = mapGenerator.origin + new Vector2(tileSize * halfMapSize.x * (.5f - Random.value), tileSize * halfMapSize.y * (.5f - Random.value)) * 2;

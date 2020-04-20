@@ -13,6 +13,10 @@ public class GameMenuLogic : MonoBehaviour
         menuPanel.SetActive(true);
         DisplayMenu();
     }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(mainMenuBuildIndex);

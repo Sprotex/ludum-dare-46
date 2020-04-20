@@ -9,6 +9,7 @@ public class Nest : MonoBehaviour
     public float hungerDecrementPerSecond = 0.01f;
     public float hungerDecrementAdd = 0.01f;
     public Image hungerIndicator;
+    public DeathUI deathUI;
 
     // NOTE(Andy): Property, because it will be integrated with the UI.
     private float HungerPercentage
@@ -21,6 +22,10 @@ public class Nest : MonoBehaviour
         {
             hungerPercentage = value;
             hungerIndicator.fillAmount = value;
+            if (HungerPercentage <= 0f)
+            {
+                deathUI.DeathByHunger();
+            }
         }
     }
 

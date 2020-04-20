@@ -36,11 +36,11 @@ public class TutorialLogic : MonoBehaviour
             step.SetActive(false);
         }
         tutorialStepIndex = tutorialSteps.Count + 1;
-        if (PlayerPrefs.GetInt(CConstants.PPrefs.Tutorial, 1) == 1)
+        if (PlayerPrefs.GetInt(CConstants.PPrefs.Strings.Tutorial, CConstants.PPrefs.DefaultValues.Tutorial) == 1)
         {
             tutorialPanel.SetActive(true);
             tutorialStepIndex = 0;
-            PlayerPrefs.SetInt(CConstants.PPrefs.Tutorial, 0);
+            PlayerPrefs.SetInt(CConstants.PPrefs.Strings.Tutorial, 0);
             tutorialSteps[tutorialStepIndex].SetActive(true);
         } else
         {

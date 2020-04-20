@@ -11,9 +11,16 @@ public class SoundManager : MonoBehaviour
     public AudioClip birdChirping;
     private AudioSource[] sources;
     private int sourceIndex = 0;
+    private float maxSoundVolume;
+    private float maxMusicVolume;
     public AudioSource Music { get; private set; }
     public AudioSource AmbientLowSource { get; private set; }
     public AudioSource AmbientHighSource { get; private set; }
+
+    public void SetSoundVolume(AudioSource source, float volume)
+    {
+        source.volume = maxSoundVolume * volume;
+    }
 
     private void Awake()
     {
@@ -38,8 +45,31 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        SetupVolume();
         SetupDynamicAudio();
         StartPermanent2DAudio();
+    }
+
+    public void OnMusicVolumeChanged(float volume)
+    {
+        PlayerPrefs.SetFloat(CConstants.PPrefs.Strings.MusicVolume, volume);
+        SetupVolume();
+    }
+
+    public void OnSoundVolumeChanged(float volume)
+    {
+        PlayerPrefs.SetFloat(CConstants.PPrefs.Strings.SoundVolume, volume);
+        SetupVolume();
+    }
+
+    private void SetupVolume()
+    {
+        maxSoundVolume = PlayerPrefs.GetFloat(CConstants.PPrefs.Strings.SoundVolume, CConstants.PPrefs.DefaultValues.SoundVolume);
+        maxMusicVolume = PlayerPrefs.GetFloat(CConstants.PPrefs.Strings.MusicVolume, CConstants.PPrefs.DefaultValues.MusicVolume);
+        if (Music != null)
+        {
+            Music.volume = maxMusicVolume;
+        }
     }
 
     private void SetupDynamicAudio()
@@ -57,15 +87,15 @@ public class SoundManager : MonoBehaviour
         Music = CreateSource("Music");
         Music.spatialBlend = 0f;
         Music.clip = mainMusic;
-        Music.volume = .2f;
+        Music.volume = maxMusicVolume;
         Music.Play();
         Music.loop = true;
         AmbientHighSource = CreateSource("Ambient High Source");
-        AmbientHighSource.volume = 0f;
+        SetSoundVolume(AmbientHighSource, 0f);
         AmbientHighSource.clip = ambientHigh;
         AmbientHighSource.Play();
         AmbientLowSource = CreateSource("Ambient Low Source");
-        AmbientLowSource.volume = 0f;
+        SetSoundVolume(AmbientLowSource, 0f);
         AmbientLowSource.clip = ambientLow;
         AmbientLowSource.Play();
     }

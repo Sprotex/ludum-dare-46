@@ -9,6 +9,11 @@ public static class CConstants
         public const string CrowFly = "CrowFly";
         public const string CrowStand = "CrowStand";
         public const string CrowAttackHit = "CrowAttackHit";
+
+        public const string PlayerAttack = "Punch";
+        public const string PlayerPickup = "Peck";
+        public const string PlayerIsFlying = "IsFlying";
+        public const string PlayerSpeed = "Speed";
     }
 
     public static class PPrefs

@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float verticalSpeed = 5f;
     public Vector2 rotationSpeed = Vector2.zero;
+    public Animator animator;
 
     private bool isFlying = false;
     private Vector3 movement = Vector3.zero;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown(CConstants.Input.Fly))
         {
             isFlying = !isFlying;
+            animator.SetBool(CConstants.Animator.PlayerIsFlying, isFlying);
         }
         var horizontalMovement = Input.GetAxis(CConstants.Input.HorizontalAxis);
         var verticalMovement = Input.GetAxis(CConstants.Input.VerticalAxis);
@@ -54,7 +56,8 @@ public class PlayerMovement : MonoBehaviour
             movement.x *= flySpeedMultiplier;
             movement.z *= flySpeedMultiplier;
         }
-        controller.Move(transform.TransformVector(movement) * moveSpeed * Time.deltaTime);
+        var scaledMovement = transform.TransformVector(movement) * moveSpeed;
+        controller.Move(scaledMovement * Time.deltaTime);
         transform.Rotate(Vector3.up, yRotation * rotationSpeed.y * Time.deltaTime);
         cameraXRig.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         if (transform.position.y > topLayerHeight)
@@ -63,11 +66,12 @@ public class PlayerMovement : MonoBehaviour
             position.y = topLayerHeight;
             transform.position = position;
         }
+        scaledMovement.y = 0f;
+        animator.SetFloat(CConstants.Animator.PlayerSpeed, scaledMovement.magnitude);
     }
     private void Update()
     {
         HandleInputs();
         MoveAndRotate();
-
     }
 }

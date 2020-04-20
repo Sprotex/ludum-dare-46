@@ -4,10 +4,11 @@ using System.Linq;
 
 public class InsideCollider : MonoBehaviour
 {
+    public LayerMask mask;
     private HashSet<GameObject> objects = new HashSet<GameObject>();
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.isTrigger)
+        if (!other.isTrigger && (mask.value & (1 << other.gameObject.layer)) > 0)
         {
             objects.Add(other.gameObject);
         }

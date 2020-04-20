@@ -6,7 +6,7 @@ public class FoodStorage : MonoBehaviour
 {
     private List<float> foodAmounts = new List<float>();
     private float totalFood = 0f;
-    private const string format = "F2";
+    private const string format = "F0";
     public TextMeshProUGUI foodTextUI;
     public void AddFood(Food food)
     {

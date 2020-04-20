@@ -13,12 +13,14 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (thing != null)
                 {
-                    var food = thing.GetComponent<Food>();
-                    if (food != null)
+                    var foodRef = thing.GetComponent<FoodReference>();
+                    if (foodRef != null)
                     {
+                        var food = foodRef.food;
+                        var destroy = foodRef.destroy;
                         storage.AddFood(food);
                         inside.Remove(thing);
-                        Destroy(thing);
+                        Destroy(destroy);
                         break;
                     }
                 }

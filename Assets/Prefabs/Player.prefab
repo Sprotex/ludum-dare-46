@@ -70,8 +70,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2831456744816510250}
-  - component: {fileID: 8857172251609501017}
   - component: {fileID: 3909127633525986408}
+  - component: {fileID: 7042563552404372072}
   m_Layer: 8
   m_Name: Attack
   m_TagString: Untagged
@@ -93,19 +93,6 @@ Transform:
   m_Father: {fileID: 4007772099443160027}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8857172251609501017
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 86864655095951279}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3909127633525986408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +105,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30181e295043fe642941bfaacbfbf4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!65 &7042563552404372072
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86864655095951279}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.78866, y: 0.48197603, z: 1}
+  m_Center: {x: 0, y: -0.25901198, z: 0}
 --- !u!1 &855166275788784544
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraXRig: {fileID: 1940010333}
   controller: {fileID: 8443947600164620404}
+  flySpeedMultiplier: 1.5
   moveSpeed: 5
   verticalSpeed: 5
   rotationSpeed: {x: 2, y: 200}
@@ -282,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e005d667f6bfe44b2d45f2eafdecc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodTextUI: {fileID: 0}
 --- !u!114 &795598570249468743
 MonoBehaviour:
   m_ObjectHideFlags: 0

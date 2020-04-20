@@ -45,6 +45,7 @@ public class MapGenerator : MonoBehaviour
     public int tileSize = 5;
     public Vector2Int halfMapSize;
     public Vector2 origin;
+    public float scalingFactor = 1f;
     private Availables[,] availables;
     private int xSize = 0;
     private int ySize = 0;
@@ -224,7 +225,8 @@ public class MapGenerator : MonoBehaviour
                 var spawnPosition = new Vector3(position.x + x * tileSize, 0f, position.y + y * tileSize);
                 var tileIndex = Random.Range(0, selectedTiles.Length);
                 var tilePrefab = selectedTiles[tileIndex];
-                Instantiate(tilePrefab, spawnPosition, spawnRotation, folder);
+                var instance = Instantiate(tilePrefab, spawnPosition, spawnRotation, folder);
+                instance.transform.localScale *= scalingFactor;
             }
         }
     }

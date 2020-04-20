@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: 1ed0a78d05949ed43aa72b0150edae2f
+guid: 2513c6d187359cf4c89afbe4d70a1417
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
-  - first:
-      74: -623603649343465320
-    second: Scene
   - first:
       74: -8819815649317086932
     second: CROW|Action

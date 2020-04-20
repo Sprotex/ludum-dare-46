@@ -21,6 +21,9 @@ public class Punch : MonoBehaviour
         if (closestCrow != null)
         {
             closestCrow.HealthPercentage -= damage;
+        } else
+        {
+            SoundManager.instance.Play(transform.position, SoundManager.instance.swipe);
         }
     }
 }

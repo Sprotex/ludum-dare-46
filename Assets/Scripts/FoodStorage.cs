@@ -10,6 +10,7 @@ public class FoodStorage : MonoBehaviour
     public TextMeshProUGUI foodTextUI;
     public void AddFood(Food food)
     {
+        SoundManager.instance.Play(transform.position, SoundManager.instance.wormPickup);
         foodAmounts.Add(food.amount);
         totalFood += food.amount;
         foodTextUI.SetText(totalFood.ToString(format));

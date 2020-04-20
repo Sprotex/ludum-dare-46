@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class SoundManager : MonoBehaviour
     public AudioClip ambientHigh;
     public AudioClip ambientLow;
     public AudioClip birdChirping;
+    public AudioClip birdFeed;
+    public AudioClip explosion;
+    public AudioClip fistHit;
+    public AudioClip playerHit;
+    public AudioClip enemyHit;
+    public AudioClip gameOver;
+    public AudioClip swipe;
+    public AudioClip wormPickup;
     private AudioSource[] sources;
     private int sourceIndex = 0;
     private float maxSoundVolume;
@@ -27,8 +36,9 @@ public class SoundManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -111,6 +121,16 @@ public class SoundManager : MonoBehaviour
         source.clip = clip;
         source.transform.position = position;
         source.Play();
+        source.volume = maxSoundVolume;
         return source;
+    }
+    public void StopSounds()
+    {
+        foreach (var sound in sources)
+        {
+            sound.Stop();
+        }
+        if (AmbientHighSource != null) AmbientHighSource.volume = 0f;
+        if (AmbientLowSource != null) AmbientLowSource.volume = 0f;
     }
 }

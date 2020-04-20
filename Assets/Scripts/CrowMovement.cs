@@ -119,6 +119,11 @@ public class CrowMovement : MonoBehaviour
             case State.APPROACHING:
             {
                 // Positions without Y axis
+                if (targetPosition == null)
+                {
+                    FindTarget();
+                    break;
+                }
                 Vector2 myPosition2D = new Vector2(transform.position.x, transform.position.z);
                 Vector2 targetPosition2D = new Vector2(targetPosition.position.x, targetPosition.position.z);
 

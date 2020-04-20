@@ -16,8 +16,13 @@ public class Health : MonoBehaviour
         }
         set
         {
+            if (healthPercentage > value)
+            {
+                SoundManager.instance.Play(transform.position, SoundManager.instance.playerHit);
+            }
             healthPercentage = value;
             healthIndicator.fillAmount = value;
+
             if (HealthPercentage <= 0f)
             {
                 deathUI.DeathByHealth();

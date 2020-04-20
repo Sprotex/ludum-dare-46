@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4057308082989119245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4057308082989119246}
+  - component: {fileID: 4057308082989119247}
+  m_Layer: 0
+  m_Name: Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4057308082989119246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057308082989119245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4057308082989119247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4057308082989119245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7273eb975c0a04f9908a81d9304e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simultaneousDynamicSounds: 64
+  mainMusic: {fileID: 8300000, guid: 418f845deb31d7145a142925b049fa45, type: 3}
+  hit: {fileID: 8300000, guid: 103bd0467bf3851408637370b721c2fa, type: 3}
+  ambientHigh: {fileID: 8300000, guid: 300f45d0528089e45a5be89c030350e0, type: 3}
+  ambientLow: {fileID: 8300000, guid: 712400f7eda2dc14db793d21e8bc4ba1, type: 3}
+  birdChirping: {fileID: 8300000, guid: 680c99650e2f95148ac607c59db9597b, type: 3}
+  birdFeed: {fileID: 8300000, guid: 5f7e539fd4f612444aad7a3e525ebbd4, type: 3}
+  explosion: {fileID: 8300000, guid: 77f6f241ed63acf40a4adc12e031ffc1, type: 3}
+  fistHit: {fileID: 8300000, guid: a9c68c3ca103ef149ab2dac839f4cc7a, type: 3}
+  playerHit: {fileID: 8300000, guid: 951273a0e64d3a24180d06caffc41bba, type: 3}
+  enemyHit: {fileID: 8300000, guid: 154027f7cf0b6e24287833caf10325c5, type: 3}
+  gameOver: {fileID: 8300000, guid: b8763393a9bcdf447bdc26e7d2d7c244, type: 3}
+  swipe: {fileID: 8300000, guid: 6338204ee92b169468059d329e6de1cb, type: 3}
+  wormPickup: {fileID: 8300000, guid: cc3692c59d3c0034baef75d2431c32eb, type: 3}

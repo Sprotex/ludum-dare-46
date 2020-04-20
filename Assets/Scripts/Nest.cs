@@ -54,6 +54,11 @@ public class Nest : MonoBehaviour
     public void Feed(float percentageAmount)
     {
         HungerPercentage = Mathf.Clamp01(HungerPercentage + percentageAmount);
-        if (percentageAmount > 0f) Score.instance.Points += 1;
+        if (percentageAmount > 0f)
+        {
+            Score.instance.Points += 1;
+            var sound = SoundManager.instance.Play(transform.position, SoundManager.instance.birdFeed);
+            sound.spatialBlend = 0f;
+        }
     }
 }

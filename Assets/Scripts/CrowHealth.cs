@@ -23,9 +23,14 @@ public class CrowHealth : MonoBehaviour
         }
         set
         {
+            if (healthPercentage > value && value > 0f)
+            {
+                SoundManager.instance.Play(transform.position, SoundManager.instance.fistHit);
+            }
             healthPercentage = value;
             if (HealthPercentage <= 0f)
             {
+                SoundManager.instance.Play(transform.position, SoundManager.instance.enemyHit);
                 Instantiate(crowDeathPrefab, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }

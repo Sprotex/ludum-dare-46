@@ -10,6 +10,8 @@ public class DeathUI : MonoBehaviour
 
     private void Common()
     {
+        var sound = SoundManager.instance.Play(Vector3.zero, SoundManager.instance.gameOver);
+        sound.spatialBlend = 0f;
         Cursor.lockState = CursorLockMode.None;
         gameMenuLogic.enabled = false;
         gameObject.SetActive(true);

@@ -2,6 +2,15 @@
 
 public static class CConstants
 {
+    public static class Animator
+    {
+        public const string CrowEating = "CrowEating";
+        public const string CrowWalk = "CrowWalk";
+        public const string CrowFly = "CrowFly";
+        public const string CrowStand = "CrowStand";
+        public const string CrowAttackHit = "CrowAttackHit";
+    }
+
     public static class PPrefs
     {
         public static class Strings

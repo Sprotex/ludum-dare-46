@@ -3600,6 +3600,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 731566635897539375}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &971041400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 795598570249468743, guid: 602243bc46f45c440b17d05977161729,
+    type: 3}
+  m_PrefabInstance: {fileID: 731566635897539375}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971041399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2666d79026725a54cbc9bce6c34c9cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &971041405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4004,15 +4016,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77ed0168033a2f46a4ba949450dabe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hungerDecrement: 0.01
-  hungryThreshold: 0.4
-  huntingSpeed: 5
-  flightHeight: 20
+  animator: {fileID: 1666447522}
+  playerHealth: {fileID: 971041400}
+  state: 0
+  timer: 0
+  attackDmg: 0.1
+  attackDelay: 0.5
+  hungerTimeout: 12
+  flightSpeed: 20
+  walkSpeed: 10
+  flightHeight: 17.67
   minimumTargetDistance: 30
   groundAttackDistance: 30
   angularVelocity: 60
   targetPosition: {fileID: 0}
   targetObject: {fileID: 0}
+  waypointAreaRange: 250
 --- !u!65 &1079282435
 BoxCollider:
   m_ObjectHideFlags: 0

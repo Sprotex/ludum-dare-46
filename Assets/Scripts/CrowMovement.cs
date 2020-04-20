@@ -51,6 +51,7 @@ public class CrowMovement : MonoBehaviour
 
     private float health;
 
+    public Animator animator;
     public Health playerHealth = null;
 
     public State state = State.IDLE;
@@ -76,7 +77,7 @@ public class CrowMovement : MonoBehaviour
 
     // Fly to the ground, when object is this close (not counting Y axis in the distance)
     public float groundAttackDistance = 10.0f;
-    
+
     public float angularVelocity = 30f;
 
     // Current target
@@ -95,182 +96,187 @@ public class CrowMovement : MonoBehaviour
         switch (state)
         {
             case State.IDLE:
+            {
+                float distToWaypoint = (transform.position - waypoint).magnitude;
+                if (distToWaypoint < 50.0f)
                 {
-                    float distToWaypoint = (transform.position - waypoint).magnitude;
-                    if (distToWaypoint < 50.0f)
-                    {
-                        GenerateWaypoint();
-                    }
-
-                    // Attack worm
-                    if (timer <= 0)
-                    {
-                        FindTarget();
-                    }
-
-                    FlyToPosition(waypoint, true, 1.0f);
+                    GenerateWaypoint();
                 }
 
-                break;
+                // Attack worm
+                if (timer <= 0)
+                {
+                    FindTarget();
+                }
+
+                FlyToPosition(waypoint, true, 1.0f);
+            }
+
+            break;
 
             case State.APPROACHING:
-                {                 
-                    // Positions without Y axis
-                    Vector2 myPosition2D = new Vector2(transform.position.x, transform.position.z);
-                    Vector2 targetPosition2D = new Vector2(targetPosition.position.x, targetPosition.position.z);
+            {
+                // Positions without Y axis
+                Vector2 myPosition2D = new Vector2(transform.position.x, transform.position.z);
+                Vector2 targetPosition2D = new Vector2(targetPosition.position.x, targetPosition.position.z);
 
-                    // Distance to target withnout Y axis
-                    float distanceToTarget2D = (myPosition2D - targetPosition2D).magnitude;
-                    
+                // Distance to target withnout Y axis
+                float distanceToTarget2D = (myPosition2D - targetPosition2D).magnitude;
 
-                    // Kamikadze
-                    if (distanceToTarget2D < groundAttackDistance)
-                    {
-                        state = State.WORM_ATTACK;
-                    }
-
-                    FlyToPosition(targetPosition.position, true, 2.0f);
-                }
-                break;
 
                 // Kamikadze
-            case State.WORM_ATTACK:
+                if (distanceToTarget2D < groundAttackDistance)
                 {
-                    float distanceToTarget3D = (transform.position - targetPosition.position).magnitude;
-
-                    
-                    if (transform.position.y <= targetPosition.position.y+1.0f)
-                    {
-                        Destroy(targetObject.gameObject);
-
-                        // ANIMATION EATING
-
-                        state = State.WORM_EATING;
-                        timer = 4.0f;
-                    }
-
-                    FlyToPosition(targetPosition.position, false, 8.0f);
+                    state = State.WORM_ATTACK;
                 }
 
-                break;
+                FlyToPosition(targetPosition.position, true, 2.0f);
+            }
+            break;
+
+            // Kamikadze
+            case State.WORM_ATTACK:
+            {
+                float distanceToTarget3D = (transform.position - targetPosition.position).magnitude;
+
+
+                if (transform.position.y <= targetPosition.position.y + 1.0f)
+                {
+                    Destroy(targetObject.gameObject);
+
+                    // ANIMATION EATING
+                    animator.SetTrigger(CConstants.Animator.CrowEating);
+
+                    state = State.WORM_EATING;
+                    timer = 4.0f;
+                }
+
+                FlyToPosition(targetPosition.position, false, 8.0f);
+            }
+
+            break;
 
             case State.WORM_EATING:
+            {
+                // Return back to air
+                if (timer <= 0)
                 {
+                    ReturnToAir();
+                }
+
+                // If player is close, attack it
+                Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                float playerDistance = (playerPosition - transform.position).magnitude;
+                if (playerDistance < 5.0f)
+                {
+                    state = State.WALK_TO_PLAYER;
+                    timer = 5.0f;
+
+                    // ANIMATION walk
+                    animator.SetTrigger(CConstants.Animator.CrowWalk);
+                }
+
+
+                // Stand straingt
+                Vector3 rotation = transform.rotation.eulerAngles;
+                rotation.x = rotation.z = 0.0f;
+                Quaternion rotQ = new Quaternion();
+                rotQ.eulerAngles = rotation;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotQ, Time.deltaTime * 180.0f);
+
+            }
+            break;
+
+            case State.RETURN_TO_AIR:
+            {
+                // Returned back to air
+                if (transform.position.y >= flightHeight - 5.0)
+                {
+                    state = State.IDLE;
+                    timer = hungerTimeout;
+                    GenerateWaypoint();
+                }
+
+                FlyToPosition(waypoint, true, 8.0f);
+            }
+            break;
+
+            case State.COMBAT:
+            {
+                // Player not specified
+                if (playerHealth == null)
+                {
+                    state = State.RETURN_TO_AIR;
+                    return;
+                }
+
+                Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                float playerDistance = (playerPosition - transform.position).magnitude;
+
+                RotateToPlayer();
+
+                if (playerDistance <= 3.0)
+                {
+                    timeToNextAttack -= Time.deltaTime;
+                    if (timeToNextAttack <= 0)
+                    {
+                        timeToNextAttack = attackDelay;
+                        playerHealth.HealthPercentage -= attackDmg;
+                        // ANIMATION attack hit
+                        animator.SetTrigger(CConstants.Animator.CrowAttackHit);
+                    }
+                }
+                else
+                {
+                    state = State.WALK_TO_PLAYER;
+                    timer = 5.0f;
+                    // ANIMATION WALK
+                    animator.SetTrigger(CConstants.Animator.CrowWalk);
+                }
+            }
+
+            break;
+
+            case State.WALK_TO_PLAYER:
+            {
+                // Player not specified
+                if (playerHealth == null)
+                {
+                    state = State.RETURN_TO_AIR;
+                    return;
+                }
+
+                RotateToPlayer();
+
+                Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                float playerDistance = (playerPosition - transform.position).magnitude;
+
+                // Follow player
+                if (playerDistance < 20.0f && playerPosition.y < transform.position.y + 5.0f)
+                {
+                    // Move the object
+                    transform.position += transform.forward * Time.deltaTime * walkSpeed;
+                    timer = 5.0f;
+
+                    if (playerDistance <= 1.5f)
+                    {
+                        state = State.COMBAT;
+                        // ANIMATION STAND
+                        animator.SetTrigger(CConstants.Animator.CrowStand);
+                    }
+                }
+                else
+                {
+                    timer -= Time.deltaTime;
                     // Return back to air
-                    if (timer <= 0)
+                    if (timer < 0.0)
                     {
                         ReturnToAir();
                     }
-
-                    // If player is close, attack it
-                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
-                    float playerDistance = (playerPosition - transform.position).magnitude;
-                    if (playerDistance < 5.0f)
-                    {
-                        state = State.WALK_TO_PLAYER;
-                        timer = 5.0f;
-
-                        // ANIMATION walk
-                    }
-
-
-                    // Stand straingt
-                    Vector3 rotation = transform.rotation.eulerAngles;
-                    rotation.x = rotation.z = 0.0f;
-                    Quaternion rotQ = new Quaternion();
-                    rotQ.eulerAngles = rotation;
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotQ, Time.deltaTime * 180.0f);
-
                 }
-                break;
+            }
 
-            case State.RETURN_TO_AIR:
-                {
-                    // Returned back to air
-                    if (transform.position.y >= flightHeight-5.0)
-                    {
-                        state = State.IDLE;
-                        timer = hungerTimeout;
-                        GenerateWaypoint();
-                    }
-
-                    FlyToPosition(waypoint, true, 8.0f);
-                }
-                break;
-
-            case State.COMBAT:
-                {
-                    // Player not specified
-                    if (playerHealth == null)
-                    {
-                        state = State.RETURN_TO_AIR;
-                        return;
-                    }
-
-                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
-                    float playerDistance = (playerPosition - transform.position).magnitude;
-
-                    RotateToPlayer();
-
-                    if (playerDistance <= 3.0)
-                    {
-                        timeToNextAttack -= Time.deltaTime;
-                        if (timeToNextAttack <= 0)
-                        {
-                            timeToNextAttack = attackDelay;
-                            playerHealth.HealthPercentage -= attackDmg;
-                            // ANIMATION attack hit
-                        }
-                    }
-                    else
-                    {
-                        state = State.WALK_TO_PLAYER;
-                        timer = 5.0f;
-                        // ANIMATION WALK
-                    }
-                }
-
-                break;
-
-            case State.WALK_TO_PLAYER:
-                {
-                    // Player not specified
-                    if (playerHealth == null)
-                    {
-                        state = State.RETURN_TO_AIR;
-                        return;
-                    }
-
-                    RotateToPlayer();
-
-                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
-                    float playerDistance = (playerPosition - transform.position).magnitude;
-
-                    // Follow player
-                    if (playerDistance < 20.0f && playerPosition.y < transform.position.y + 5.0f)
-                    {
-                        // Move the object
-                        transform.position += transform.forward * Time.deltaTime * walkSpeed;
-                        timer = 5.0f;
-
-                        if (playerDistance <= 1.5f)
-                        {
-                            state = State.COMBAT;
-                            // ANIMATION STAND
-                        }
-                    }
-                    else
-                    {
-                        timer -= Time.deltaTime;
-                        // Return back to air
-                        if (timer < 0.0)
-                        {
-                            ReturnToAir();
-                        }
-                    }
-                }
-
-                break;
+            break;
 
             default:
                 break;
@@ -283,6 +289,7 @@ public class CrowMovement : MonoBehaviour
         state = State.RETURN_TO_AIR;
 
         // ANIMATION FLY
+        animator.SetTrigger(CConstants.Animator.CrowFly);
 
         float direction = Random.Range(0.0f, 6.28f);
         float distance = groundAttackDistance;

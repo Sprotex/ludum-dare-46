@@ -1,0 +1,283 @@
+fileFormatVersion: 2
+guid: 94874ba6b14c9a94a9f715722bcc649f
+ModelImporter:
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      74: 7585916873318540120
+    second: Circle|BirdDOWN
+  - first:
+      74: 2313336941185192032
+    second: Circle|BirdFight
+  - first:
+      74: 3917727962960016009
+    second: Circle|BirdFlyBasic
+  - first:
+      74: 846425887616965673
+    second: Circle|BirdFlyFly
+  - first:
+      74: 268975408436659952
+    second: Circle|BirdGloryKill
+  - first:
+      74: -6049135461824715551
+    second: Circle|BirdUP
+  - first:
+      74: -199384049903161741
+    second: Circle|BirdWalk
+  - first:
+      74: -6134556970206186302
+    second: Circle|BirdZob
+  - first:
+      74: 4796740646528735979
+    second: Circle|Walk.001
+  - first:
+      74: 3387413093717572532
+    second: Circle|WRMBite
+  - first:
+      74: 613503493451814650
+    second: Circle|WRMFastSlide
+  - first:
+      74: 3899798836781024448
+    second: Circle|WRMSlowSlide
+  - first:
+      74: -742728186545119432
+    second: Armature.001|BirdDOWN
+  - first:
+      74: -5235134462020308972
+    second: Armature.001|BirdFight
+  - first:
+      74: -4240802490925754092
+    second: Armature.001|BirdFlyBasic
+  - first:
+      74: -8793412735611456658
+    second: Armature.001|BirdFlyFly
+  - first:
+      74: -6846380747743479720
+    second: Armature.001|BirdGloryKill
+  - first:
+      74: 4220252925257335460
+    second: Armature.001|BirdUP
+  - first:
+      74: -8509561505064561894
+    second: Armature.001|BirdWalk
+  - first:
+      74: -1065876461742822331
+    second: Armature.001|BirdZob
+  - first:
+      74: -3738166888602775551
+    second: Armature.001|Burrow.001
+  - first:
+      74: 2188363450422351353
+    second: Armature.001|Walk.001
+  - first:
+      74: -3723741214705184992
+    second: Armature.001|WRMBite
+  - first:
+      74: 892115306803703518
+    second: Armature.001|WRMFastSlide
+  - first:
+      74: 2039437486983723283
+    second: Armature.001|WRMSlowSlide
+  - first:
+      74: 2399093338261135838
+    second: Birb|BirdDOWN
+  - first:
+      74: -2876068989540457638
+    second: Birb|BirdFight
+  - first:
+      74: -5462414262720931072
+    second: Birb|BirdFlyBasic
+  - first:
+      74: 5122787375502447045
+    second: Birb|BirdFlyFly
+  - first:
+      74: 7742769053317012099
+    second: Birb|BirdGloryKill
+  - first:
+      74: 5284593189830152596
+    second: Birb|BirdStay
+  - first:
+      74: 7735650204678303358
+    second: Birb|BirdUP
+  - first:
+      74: 2071512902402229959
+    second: Birb|BirdWalk
+  - first:
+      74: 9141919733953218946
+    second: Birb|BirdZob
+  - first:
+      74: -6948546337123331545
+    second: Birb|WRMBite
+  - first:
+      74: -1903191453201092298
+    second: Birb|WRMFastSlide
+  - first:
+      74: 7459925866497854544
+    second: Birb|WRMSlowSlide
+  - first:
+      74: -7470878642475899737
+    second: Armature|BirdDOWN
+  - first:
+      74: 8711827420785948721
+    second: Armature|BirdFight
+  - first:
+      74: 5993506344855916369
+    second: Armature|BirdFlyBasic
+  - first:
+      74: 6331651497533170999
+    second: Armature|BirdFlyFly
+  - first:
+      74: -3117801034940103593
+    second: Armature|BirdGloryKill
+  - first:
+      74: -2657643909897085034
+    second: Armature|BirdStay
+  - first:
+      74: 1323620588839258837
+    second: Armature|BirdUP
+  - first:
+      74: -6723841368329090689
+    second: Armature|BirdWalk
+  - first:
+      74: -5649151841507932236
+    second: Armature|BirdZob
+  - first:
+      74: -1341272897774471622
+    second: Armature|WRMBite
+  - first:
+      74: -4172112990380328822
+    second: Armature|WRMFastSlide
+  - first:
+      74: -3624348089718058593
+    second: Armature|WRMSlowSlide
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 80fd381de01700f4aa4a24b3ee0d14af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 431e00ec153c00d489a6f30c64b75c51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: b343b4e4dee827f42a24e6ea85d25d68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 83208bc0f8f407341b5fbcfb8ce15245, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: acc77a912cf2ce54cafda10d435e5e13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 3a7da714529b1ef4faa13cf365006c89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: 5406c13fbb9ea064b8e563d5b84bc10d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 99b7d26e779105b4b93c9b6797085d16, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

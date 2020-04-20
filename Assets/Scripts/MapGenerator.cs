@@ -44,6 +44,7 @@ public class MapGenerator : MonoBehaviour
     public Transform folder;
     public int tileSize = 5;
     public Vector2Int halfMapSize;
+    public Vector2Int borderHalfSize;
     public Vector2 origin;
     public float scalingFactor = 1f;
     private Availables[,] availables;
@@ -138,6 +139,18 @@ public class MapGenerator : MonoBehaviour
         }
         return result;
     }
+    private void SpawnMountain(int x, int y, Vector3 position, ref int counter)
+    {
+        var yRotation = Random.Range(0, 4) * 90f;
+        var spawnRotation = Quaternion.Euler(0f, yRotation, 0f);
+        var spawnPosition = new Vector3(position.x + x * tileSize, 0f, position.y + y * tileSize);
+        var tile = oTiles[Random.Range(0, oTiles.Length)];
+        Instantiate(tile, spawnPosition, spawnRotation, folder);
+        if (counter++ >= 100)
+        {
+            return;
+        }
+    }
     private void Start()
     {
         var position = origin;
@@ -227,6 +240,33 @@ public class MapGenerator : MonoBehaviour
                 var tilePrefab = selectedTiles[tileIndex];
                 var instance = Instantiate(tilePrefab, spawnPosition, spawnRotation, folder);
                 instance.transform.localScale *= scalingFactor;
+            }
+        }
+        var counter = 0;
+        for (var x = -halfMapSize.x - borderHalfSize.x; x < -halfMapSize.x; ++x)
+        {
+            for (var y = -halfMapSize.y - borderHalfSize.y; y <= halfMapSize.y + borderHalfSize.y; ++y)
+            {
+                SpawnMountain(x, y, position, ref counter);
+            }
+        }
+        counter = 0;
+        for (var x = halfMapSize.x + 1; x <= halfMapSize.x + borderHalfSize.x; ++x)
+        {
+            for (var y = -halfMapSize.y - borderHalfSize.y; y <= halfMapSize.y + borderHalfSize.y; ++y)
+            {
+                SpawnMountain(x, y, position, ref counter);
+            }
+        }
+        counter = 0;
+        for (var x = -halfMapSize.x; x <= halfMapSize.x; ++x) {
+            for (var y = -halfMapSize.y - borderHalfSize.y; y < -halfMapSize.y; ++y)
+            {
+                SpawnMountain(x, y, position, ref counter);
+            }
+            for (var y = halfMapSize.y + 1; y <= halfMapSize.y + borderHalfSize.y; ++y)
+            {
+                SpawnMountain(x, y, position, ref counter);
             }
         }
     }

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 rotationSpeed = Vector2.zero;
     public Animator animator;
 
-    private bool isFlying = false;
+    private bool isFlying = true;
     private Vector3 movement = Vector3.zero;
     private float xRotation = 0f;
     private float yRotation = 0f;

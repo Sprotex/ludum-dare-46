@@ -167,15 +167,18 @@ public class CrowMovement : MonoBehaviour
                 }
 
                 // If player is close, attack it
-                Vector3 playerPosition = playerHealth.gameObject.transform.position;
-                float playerDistance = (playerPosition - transform.position).magnitude;
-                if (playerDistance < 5.0f)
+                if (playerHealth != null)
                 {
-                    state = State.WALK_TO_PLAYER;
-                    timer = 5.0f;
+                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                    float playerDistance = (playerPosition - transform.position).magnitude;
+                    if (playerDistance < 5.0f)
+                    {
+                        state = State.WALK_TO_PLAYER;
+                        timer = 5.0f;
 
-                    // ANIMATION walk
-                    animator.SetTrigger(CConstants.Animator.CrowWalk);
+                        // ANIMATION walk
+                        animator.SetTrigger(CConstants.Animator.CrowWalk);
+                    }
                 }
 
 

@@ -1,26 +1,16 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
     public InsideCollider inside;
     public FoodStorage storage;
     public Animator animator;
-    public InsideCollider scanner;
+    public Punch[] punches;
     public float[] punchDamagesPercent;
 
     public void Attack(int count)
     {
-        var objectsInRange = scanner.GetObjectsInside();
-        foreach (var thing in objectsInRange)
-        {
-            var health = thing.GetComponent<CrowHealth>();
-            if (health != null)
-            {
-                health.HealthPercentage -= punchDamagesPercent[count];
-                break;
-            }
-        }
+        punches[count].Attack(punchDamagesPercent[count]);
     }
 
     public void Pickup()

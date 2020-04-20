@@ -7,6 +7,7 @@ public class CrowSpawner : MonoBehaviour
     public GameObject crowPrefab;
     public float delayBetweenSpawns = 30f; 
     public int maxWormCount = 10;
+    public Health playerHealth;
     public Transform crowFolder;
 
     private IEnumerator spawningCoroutine;
@@ -20,7 +21,6 @@ public class CrowSpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(delayBetweenSpawns);
 
            /* if (FeedingPoints.instance.food.Count >= maxWormCount)
                 continue;*/
@@ -32,7 +32,9 @@ public class CrowSpawner : MonoBehaviour
         
             
             var instance = Instantiate(crowPrefab, spawnPosition, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f), crowFolder);
+            instance.GetComponent<CrowMovement>().playerHealth = playerHealth;
             Destroy(instance, 60f);
+            yield return new WaitForSeconds(delayBetweenSpawns);
         }
     }
 

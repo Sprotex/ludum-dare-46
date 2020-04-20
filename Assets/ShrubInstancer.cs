@@ -4,6 +4,8 @@ using UnityEngine;
 public class ShrubInstancer : MonoBehaviour
 {
     public int shrubCount = 5;
+    public float treeProbability = 0.01f;
+    public GameObject treePrefab;
     public GameObject[] shrubPrefabs;
     public SphereCollider[] areas;
     private void Start()

@@ -1,47 +1,8 @@
 fileFormatVersion: 2
-guid: 7e2032a5c519a5046815ca87073e975a
+guid: ede571ee8ada5a246bbbda025a49a71b
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable:
-  - first:
-      74: -7470878642475899737
-    second: Armature|BirdDOWN
-  - first:
-      74: 8711827420785948721
-    second: Armature|BirdFight
-  - first:
-      74: -6574412687821465295
-    second: Armature|BirdFightDva
-  - first:
-      74: -7029382307443208068
-    second: Armature|BirdFightKomplet
-  - first:
-      74: -2544937446709241600
-    second: Armature|BirdFightTri
-  - first:
-      74: 5993506344855916369
-    second: Armature|BirdFlyBasic
-  - first:
-      74: 6331651497533170999
-    second: Armature|BirdFlyFly
-  - first:
-      74: -3117801034940103593
-    second: Armature|BirdGloryKill
-  - first:
-      74: -2657643909897085034
-    second: Armature|BirdStay
-  - first:
-      74: 1323620588839258837
-    second: Armature|BirdUP
-  - first:
-      74: -6723841368329090689
-    second: Armature|BirdWalk
-  - first:
-      74: -5649151841507932236
-    second: Armature|BirdZob
-  - first:
-      74: -8791666096906195877
-    second: Armature|nepouzivat
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 1

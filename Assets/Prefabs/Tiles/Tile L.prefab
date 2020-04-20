@@ -60,6 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shrubCount: 20
+  treeProbability: 0.01
+  treePrefab: {fileID: 3730128247222037696, guid: c8a57544ebf9a114ea5b298ac18f389f,
+    type: 3}
   shrubPrefabs:
   - {fileID: 9038875684744267359, guid: 93a4bd7645223534db66cdedb349ef29, type: 3}
   - {fileID: 711923658047336322, guid: 52d58436db81fc6408ea2bd64bc94cdc, type: 3}

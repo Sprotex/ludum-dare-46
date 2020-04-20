@@ -11,16 +11,17 @@ public class TutorialLogic : MonoBehaviour
     public GameObject pickupPanel;
     public GameObject feedSelfPanel;
     public GameObject feedChildrenPanel;
+    public GameObject lastStep;
     private List<GameObject> tutorialSteps = new List<GameObject>();
     private List<string> tutorialButtonSteps = new List<string>();
     private int tutorialStepIndex = 0;
 
     private void Start()
     {
-        tutorialSteps.Add(horizontalMovePanel);
-        tutorialButtonSteps.Add(CConstants.Input.HorizontalAxis);
         tutorialSteps.Add(verticalMovePanel);
         tutorialButtonSteps.Add(CConstants.Input.VerticalAxis);
+        tutorialSteps.Add(horizontalMovePanel);
+        tutorialButtonSteps.Add(CConstants.Input.HorizontalAxis);
         tutorialSteps.Add(flyPanel);
         tutorialButtonSteps.Add(CConstants.Input.Fly);
         tutorialSteps.Add(attackPanel);
@@ -31,6 +32,7 @@ public class TutorialLogic : MonoBehaviour
         tutorialButtonSteps.Add(CConstants.Input.FeedChildren);
         tutorialSteps.Add(feedSelfPanel);
         tutorialButtonSteps.Add(CConstants.Input.FeedSelf);
+        lastStep.SetActive(false);
         foreach (var step in tutorialSteps)
         {
             step.SetActive(false);
@@ -40,7 +42,6 @@ public class TutorialLogic : MonoBehaviour
         {
             tutorialPanel.SetActive(true);
             tutorialStepIndex = 0;
-            PlayerPrefs.SetInt(CConstants.PPrefs.Strings.Tutorial, 0);
             tutorialSteps[tutorialStepIndex].SetActive(true);
         } else
         {
@@ -50,18 +51,31 @@ public class TutorialLogic : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButton(tutorialButtonSteps[tutorialStepIndex]))
+        if (tutorialStepIndex != tutorialSteps.Count)
         {
-            tutorialSteps[tutorialStepIndex].SetActive(false);
-            if (tutorialStepIndex + 1 < tutorialSteps.Count)
+            if (Input.GetButton(tutorialButtonSteps[tutorialStepIndex]))
             {
-                ++tutorialStepIndex;
-                tutorialSteps[tutorialStepIndex].SetActive(true);
-            } else
-            {
-                Destroy(tutorialPanel);
-                Destroy(gameObject);
+                tutorialSteps[tutorialStepIndex].SetActive(false);
+                if (tutorialStepIndex < tutorialSteps.Count)
+                {
+                    ++tutorialStepIndex;
+                    if (tutorialStepIndex < tutorialSteps.Count)
+                    {
+                        tutorialSteps[tutorialStepIndex].SetActive(true);
+                    }
+                }
+                else
+                {
+                    Destroy(tutorialPanel);
+                    Destroy(gameObject);
+                }
             }
+        } else
+        {
+            lastStep.SetActive(true); 
+            PlayerPrefs.SetInt(CConstants.PPrefs.Strings.Tutorial, 0);
+            CoroutineManager.instance.DestroyAfter(tutorialPanel, 2f);
+            CoroutineManager.instance.DestroyAfter(gameObject, 2f);
         }
     }
 }

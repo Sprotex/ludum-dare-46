@@ -54,7 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3703270362762301785}
   m_Layer: 0
-  m_Name: Shrubs
+  m_Name: Shrub Instancer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

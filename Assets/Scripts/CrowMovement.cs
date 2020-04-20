@@ -65,6 +65,8 @@ public class CrowMovement : MonoBehaviour
 
     public float hungerTimeout = 12.0f;
 
+    public float feedingTime = 10.0f;
+
 
     public float flightSpeed = 20f;
     public float walkSpeed = 10f;
@@ -148,7 +150,7 @@ public class CrowMovement : MonoBehaviour
                     animator.SetTrigger(CConstants.Animator.CrowEating);
 
                     state = State.WORM_EATING;
-                    timer = 4.0f;
+                    timer = feedingTime;
                 }
 
                 FlyToPosition(targetPosition.position, false, 8.0f);

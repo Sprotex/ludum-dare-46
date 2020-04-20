@@ -8,8 +8,11 @@ public class FollowTarget : MonoBehaviour
     
     private void LateUpdate()
     {
-        var interpolatedTime = Time.deltaTime * interpolationSpeed;
-        transform.position = Vector3.Lerp(transform.position, target.position, interpolatedTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget.rotation, interpolatedTime);
+        if (target != null)
+        {
+            var interpolatedTime = Time.deltaTime * interpolationSpeed;
+            transform.position = Vector3.Lerp(transform.position, target.position, interpolatedTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotationTarget.rotation, interpolatedTime);
+        }
     }
 }

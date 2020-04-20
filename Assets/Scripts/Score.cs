@@ -14,7 +14,7 @@ public class Score : MonoBehaviour
         } set
         {
             points = value;
-            text.SetText(CConstants.Texts.Score + Points.ToString());
+            text.SetText(Points.ToString());
         }
     }
     private void Awake()

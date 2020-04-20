@@ -79,8 +79,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   rb: {fileID: 3401544600077900907}
-  moveSpeed: 20
-  runSpeedMultiplier: 2
+  moveSpeed: 5
+  runSpeedMultiplier: 1.5
   rotationSpeed: 5
   accelerationMultiplier: 1
   timeUntilBurrowingStarts: 2.5

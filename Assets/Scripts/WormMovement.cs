@@ -53,6 +53,6 @@ public class WormMovement : MonoBehaviour
             currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, interpolatedTime);
             safeTime = Time.time;
         }
-        rb.velocity = transform.forward * currentSpeed * Time.deltaTime;
+        rb.velocity += transform.forward * currentSpeed * Time.deltaTime;
     }
 }

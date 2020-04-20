@@ -2,10 +2,6 @@
 
 public static class CConstants
 {
-    public static class Texts {
-        public const string Score = "Score: ";
-    }
-
     public static class PPrefs
     {
         public static class Strings

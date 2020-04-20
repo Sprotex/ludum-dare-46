@@ -2,99 +2,315 @@
 
 public class CrowMovement : MonoBehaviour
 {
-    public float hungerDecrement = 0.1f;
-    public float hungryThreshold = 0.4f;
-    public float huntingSpeed = 15f;
+
+    public enum State
+    {
+        // Flyting around, when timer is out, switch to APPROACHING
+        IDLE,
+
+        // Flying closer to a worm. When you get close enough, do WORM_ATTACK
+        APPROACHING,
+
+        // Fly down from the sky to the worm. When you get it, switch to WORM_EATING
+        WORM_ATTACK,
+
+        // Staying on the ground, eating the worm, then RETURN_TO_AIR. If attacked by player, go to WALK_TO_PLAYER
+        WORM_EATING,
+
+        // Get back to air, then go back to IDLE
+        RETURN_TO_AIR,
+
+        // Attack player. If player is too far away, WALK_TO_PLAYER
+        COMBAT,
+
+        // Get closer to the player by walking (used in combat). If close enough, go to COMBAT. If the player is away for too long, RETURN_TO_AIR 
+        WALK_TO_PLAYER,
+    }
+
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+
+        set
+        {
+            if (value < health)
+            {
+                if (state == State.WORM_EATING)
+                {
+                    timer = 5.0f;
+                    state = State.WALK_TO_PLAYER;
+                }
+            }
+
+            health = value;
+        }
+    }
+
+    private float health;
+
+    public Health playerHealth = null;
+
+    public State state = State.IDLE;
+    // Universal timer for various timeouts
+    public float timer = 0.0f;
+
+    private float timeToNextAttack = 0.0f;
+
+    public float attackDmg = 0.1f;
+    public float attackDelay = 0.5f;
+
+    public float hungerTimeout = 12.0f;
+
+
+    public float flightSpeed = 20f;
+    public float walkSpeed = 10f;
 
     // Height of idle flight
     public float flightHeight = 20.0f;
 
     // Only look at worms that are not that close
-    public float minimumTargetDistance = 30.0f;
+    public float minimumTargetDistance = 40.0f;
 
     // Fly to the ground, when object is this close (not counting Y axis in the distance)
-    public float groundAttackDistance = 30.0f;
+    public float groundAttackDistance = 10.0f;
     
-    public float angularVelocity = 60f;
+    public float angularVelocity = 30f;
 
     // Current target
     public Transform targetPosition = null;
     public Food targetObject = null;
 
 
-    private float hungerPercentage = 0f;
-
     // Waypoints used, when not attacking a worm
     private Vector3 waypoint = new Vector3(0.0f, 0.0f, 0.0f);
-    float timeToNextWaypoint = 5.0f;
-    float waypointAreaRange = 250.0f;
-
-    // The closest it ever was to it's current target
-    private float closesDistanceToTarget = float.PositiveInfinity;
+    public float waypointAreaRange = 250.0f;
 
     private void Update()
     {
-        if (hungerPercentage <= hungryThreshold) {
-            if (targetPosition == null)
-            {
-                // No target -> find some
-                FlyToPosition(new Vector3(0.0f, 0.0f, 0.0f), true);
-                FindTarget();
-            } 
-            else 
-            {
-                // Positions without Y axis
-                Vector2 myPosition2D = new Vector2(transform.position.x, transform.position.z);
-                Vector2 targetPosition2D = new Vector2(targetPosition.position.x, targetPosition.position.z);
+        timer -= Time.deltaTime;
 
-                // Distance to target with and withnout Y axis
-                float distanceToTarget2D = (myPosition2D - targetPosition2D).magnitude;
-                float distanceToTarget3D = (transform.position - targetPosition.position).magnitude;
-
-                closesDistanceToTarget = Mathf.Min(closesDistanceToTarget, distanceToTarget2D);
-
-                FlyToPosition(targetPosition.position, distanceToTarget2D > groundAttackDistance);
-
-                // Worm taken
-                if ((transform.position - targetPosition.position).sqrMagnitude < 5.0f)
-                {
-                    Destroy(targetObject.gameObject);
-                    FindTarget();
-                    HeadUp();
-                    hungerPercentage = 1.0f;
-                // Counld not hit this worm
-                }else if (closesDistanceToTarget * 1.5 < distanceToTarget2D)
-                {
-                    FindTarget();
-                }
-            }
-        }else
+        switch (state)
         {
-            // Idle mode, follow waypoints
-            timeToNextWaypoint -= Time.deltaTime;
-            if (timeToNextWaypoint < 0.0f)
-            {
-                // New waypoint
-                timeToNextWaypoint = 6.0f;
-                float x = Random.Range(-waypointAreaRange, waypointAreaRange);
-                float y = Random.Range(-waypointAreaRange, waypointAreaRange);
-                waypoint = new Vector3(x, y, flightHeight);
-            }
-            FlyToPosition(waypoint, true);
+            case State.IDLE:
+                {
+                    float distToWaypoint = (transform.position - waypoint).magnitude;
+                    if (distToWaypoint < 50.0f)
+                    {
+                        GenerateWaypoint();
+                    }
+
+                    // Attack worm
+                    if (timer <= 0)
+                    {
+                        FindTarget();
+                    }
+
+                    FlyToPosition(waypoint, true, 1.0f);
+                }
+
+                break;
+
+            case State.APPROACHING:
+                {                 
+                    // Positions without Y axis
+                    Vector2 myPosition2D = new Vector2(transform.position.x, transform.position.z);
+                    Vector2 targetPosition2D = new Vector2(targetPosition.position.x, targetPosition.position.z);
+
+                    // Distance to target withnout Y axis
+                    float distanceToTarget2D = (myPosition2D - targetPosition2D).magnitude;
+                    
+
+                    // Kamikadze
+                    if (distanceToTarget2D < groundAttackDistance)
+                    {
+                        state = State.WORM_ATTACK;
+                    }
+
+                    FlyToPosition(targetPosition.position, true, 2.0f);
+                }
+                break;
+
+                // Kamikadze
+            case State.WORM_ATTACK:
+                {
+                    float distanceToTarget3D = (transform.position - targetPosition.position).magnitude;
+
+                    
+                    if (transform.position.y <= targetPosition.position.y+1.0f)
+                    {
+                        Destroy(targetObject.gameObject);
+
+                        // ANIMATION EATING
+
+                        state = State.WORM_EATING;
+                        timer = 4.0f;
+                    }
+
+                    FlyToPosition(targetPosition.position, false, 8.0f);
+                }
+
+                break;
+
+            case State.WORM_EATING:
+                {
+                    // Return back to air
+                    if (timer <= 0)
+                    {
+                        ReturnToAir();
+                    }
+
+                    // If player is close, attack it
+                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                    float playerDistance = (playerPosition - transform.position).magnitude;
+                    if (playerDistance < 5.0f)
+                    {
+                        state = State.WALK_TO_PLAYER;
+                        timer = 5.0f;
+
+                        // ANIMATION walk
+                    }
+
+
+                    // Stand straingt
+                    Vector3 rotation = transform.rotation.eulerAngles;
+                    rotation.x = rotation.z = 0.0f;
+                    Quaternion rotQ = new Quaternion();
+                    rotQ.eulerAngles = rotation;
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotQ, Time.deltaTime * 180.0f);
+
+                }
+                break;
+
+            case State.RETURN_TO_AIR:
+                {
+                    // Returned back to air
+                    if (transform.position.y >= flightHeight-5.0)
+                    {
+                        state = State.IDLE;
+                        timer = hungerTimeout;
+                        GenerateWaypoint();
+                    }
+
+                    FlyToPosition(waypoint, true, 8.0f);
+                }
+                break;
+
+            case State.COMBAT:
+                {
+                    // Player not specified
+                    if (playerHealth == null)
+                    {
+                        state = State.RETURN_TO_AIR;
+                        return;
+                    }
+
+                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                    float playerDistance = (playerPosition - transform.position).magnitude;
+
+                    RotateToPlayer();
+
+                    if (playerDistance <= 3.0)
+                    {
+                        timeToNextAttack -= Time.deltaTime;
+                        if (timeToNextAttack <= 0)
+                        {
+                            timeToNextAttack = attackDelay;
+                            playerHealth.HealthPercentage -= attackDmg;
+                            // ANIMATION attack hit
+                        }
+                    }
+                    else
+                    {
+                        state = State.WALK_TO_PLAYER;
+                        timer = 5.0f;
+                        // ANIMATION WALK
+                    }
+                }
+
+                break;
+
+            case State.WALK_TO_PLAYER:
+                {
+                    // Player not specified
+                    if (playerHealth == null)
+                    {
+                        state = State.RETURN_TO_AIR;
+                        return;
+                    }
+
+                    RotateToPlayer();
+
+                    Vector3 playerPosition = playerHealth.gameObject.transform.position;
+                    float playerDistance = (playerPosition - transform.position).magnitude;
+
+                    // Follow player
+                    if (playerDistance < 20.0f && playerPosition.y < transform.position.y + 5.0f)
+                    {
+                        // Move the object
+                        transform.position += transform.forward * Time.deltaTime * walkSpeed;
+                        timer = 5.0f;
+
+                        if (playerDistance <= 1.5f)
+                        {
+                            state = State.COMBAT;
+                            // ANIMATION STAND
+                        }
+                    }
+                    else
+                    {
+                        timer -= Time.deltaTime;
+                        // Return back to air
+                        if (timer < 0.0)
+                        {
+                            ReturnToAir();
+                        }
+                    }
+                }
+
+                break;
+
+            default:
+                break;
+
         }
-
-
-        hungerPercentage = Mathf.Clamp01(hungerPercentage - hungerDecrement * Time.deltaTime);
     }
 
-    private void HeadUp()
+    private void ReturnToAir()
     {
-        Vector3 direction = transform.rotation.eulerAngles;
-        direction.y = Mathf.Abs(direction.y);
-        transform.rotation = Quaternion.LookRotation(direction);
+        state = State.RETURN_TO_AIR;
+
+        // ANIMATION FLY
+
+        float direction = Random.Range(0.0f, 6.28f);
+        float distance = groundAttackDistance;
+        waypoint = new Vector3(Mathf.Sin(direction) * distance, 0.0f, Mathf.Cos(direction) * distance);
+        waypoint += transform.position;
+        waypoint.y = flightHeight;
     }
 
-    private void FlyToPosition(Vector3 targetPosition, bool stayHigh)
+    private void RotateToPlayer()
+    {
+        // Get direction to player
+        Vector3 playerPosition = playerHealth.gameObject.transform.position;
+        Vector3 direction = (playerPosition - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+
+        // Slowly change direction
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * angularVelocity * 10.0f);
+    }
+
+    private void GenerateWaypoint()
+    {
+        float x = Random.Range(-waypointAreaRange, waypointAreaRange);
+        float y = Random.Range(-waypointAreaRange, waypointAreaRange);
+        waypoint = new Vector3(x, y, flightHeight);
+    }
+
+    private void FlyToPosition(Vector3 targetPosition, bool stayHigh, float angularSpeedMultiplier)
     {
         // Do not fly to ground, stay in the air
         if (stayHigh)
@@ -104,11 +320,12 @@ public class CrowMovement : MonoBehaviour
         Vector3 direction = (targetPosition - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
+
         // Slowly change direction
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * angularVelocity);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * angularVelocity * angularSpeedMultiplier);
 
         // Move the object
-        transform.position += transform.forward * Time.deltaTime * huntingSpeed;
+        transform.position += transform.forward * Time.deltaTime * flightSpeed;
 
     }
 
@@ -118,8 +335,6 @@ public class CrowMovement : MonoBehaviour
 
         targetObject = null;
         targetPosition = null;
-        closesDistanceToTarget = float.PositiveInfinity;
-
 
         // find a target
         var closestDistance = float.PositiveInfinity;
@@ -132,6 +347,7 @@ public class CrowMovement : MonoBehaviour
                 targetObject = food;
                 targetPosition = food.transform;
                 closestDistance = magnitude;
+                state = State.APPROACHING;
             }
         }
     }
